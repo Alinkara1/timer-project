@@ -22,6 +22,7 @@
       height: 100vh;
       font-family: 'Antipasto Pro', sans-serif;
       color: #ffffff;
+      position: relative; /* важно для абсолютного позиционирования таймера на мобиле */
     }
 
     .time-block {
@@ -68,7 +69,7 @@
       height: 80px;
     }
 
-    /* Пульсация */
+    /* Анимация пульсации цифр */
     .pulse {
       animation: pulseAnim 0.3s ease;
     }
@@ -79,13 +80,18 @@
       100% { transform: scale(1); }
     }
 
-    /* Адаптив: на мобильных уменьшаем на 70 пикселей */
+    /* Адаптив на мобильных: ширина 213px и вертикальное центрирование */
     @media (max-width: 768px) {
       .time-block {
-        width: 213px; /* 283 - 70 = 213px */
+        width: 213px; /* уменьшаем ширину на мобильных */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: initial;
+        right: initial;
       }
       .number {
-        font-size: 50px; /* ещё чуть меньше шрифт */
+        font-size: 50px; /* меньше размер цифр на мобиле */
       }
       .label {
         font-size: 12px;
@@ -173,4 +179,3 @@
   </script>
 </body>
 </html>
-
