@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <title>Таймер вечеринки</title>
   <style>
+    @font-face {
+      font-family: 'Antipasto Pro';
+      src: url('https://gremmparty.ru/mys/ANTIPASTOPRO-MEDIUM.TTF') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -15,95 +22,101 @@
       font-family: 'Antipasto Pro', sans-serif;
       color: #ffffff;
     }
-    @font-face {
-      font-family: 'Antipasto Pro';
-      src: url('https://gremmparty.ru/mys/ANTIPASTOPRO-MEDIUM.TTF') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
+
     .time-block {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     #countdown {
       display: flex;
-      justify-content: center;
-      align-items: baseline;
-      gap: 10px;
+      align-items: flex-end;
+      gap: 15px;
     }
+
+    .time-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .number {
       font-size: 80px;
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1;
     }
+
+    .label {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+
     .separator {
       font-size: 80px;
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1;
-    }
-    .labels {
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      margin-top: 5px;
-    }
-    .label {
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: 1px;
-      line-height: 18px;
-      color: #ffffff;
+      margin-bottom: 25px; /* поднять двоеточие повыше */
     }
   </style>
 </head>
+
 <body>
   <div class="time-block">
     <div id="countdown">
-      <div class="number" id="days">00</div>
+      <div class="time-unit">
+        <div class="number" id="days">00</div>
+        <div class="label">дней</div>
+      </div>
       <div class="separator">:</div>
-      <div class="number" id="hours">00</div>
+      <div class="time-unit">
+        <div class="number" id="hours">00</div>
+        <div class="label">часов</div>
+      </div>
       <div class="separator">:</div>
-      <div class="number" id="minutes">00</div>
+      <div class="time-unit">
+        <div class="number" id="minutes">00</div>
+        <div class="label">минут</div>
+      </div>
       <div class="separator">:</div>
-      <div class="number" id="seconds">00</div>
-    </div>
-    <div class="labels">
-      <div class="label">дней</div>
-      <div class="label">часов</div>
-      <div class="label">минут</div>
-      <div class="label">секунд</div>
+      <div class="time-unit">
+        <div class="number" id="seconds">00</div>
+        <div class="label">секунд</div>
+      </div>
     </div>
   </div>
 
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const targetDate = new Date('2025-05-30T19:00:00').getTime();
+    document.addEventListener('DOMContentLoaded', function() {
+      const targetDate = new Date('2025-05-30T19:00:00').getTime();
 
-    function pad(n) {
-      return n < 10 ? '0' + n : n;
-    }
+      function pad(n) {
+        return n < 10 ? '0' + n : n;
+      }
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById('days').innerText = pad(days);
-      document.getElementById('hours').innerText = pad(hours);
-      document.getElementById('minutes').innerText = pad(minutes);
-      document.getElementById('seconds').innerText = pad(seconds);
-    }
+        document.getElementById('days').innerText = pad(days);
+        document.getElementById('hours').innerText = pad(hours);
+        document.getElementById('minutes').innerText = pad(minutes);
+        document.getElementById('seconds').innerText = pad(seconds);
+      }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  });
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    });
   </script>
 </body>
 </html>
+
