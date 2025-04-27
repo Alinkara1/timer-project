@@ -41,6 +41,7 @@
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1;
+      transition: transform 0.2s ease; /* для анимации */
     }
 
     .label {
@@ -60,9 +61,21 @@
       align-items: center;
       justify-content: center;
       height: 100%;
+      margin-top: 30px; /* Поднимаем на десктопах */
     }
 
-    /* Адаптив для мобилок */
+    /* Пульсация */
+    .pulse {
+      animation: pulseAnim 0.3s ease;
+    }
+
+    @keyframes pulseAnim {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* Адаптив для планшетов */
     @media (max-width: 768px) {
       .number {
         font-size: 48px;
@@ -72,9 +85,11 @@
       }
       .separator {
         font-size: 48px;
+        margin-top: 20px; /* Чуть ниже подъем */
       }
     }
 
+    /* Адаптив для телефонов */
     @media (max-width: 480px) {
       .number {
         font-size: 36px;
@@ -84,6 +99,7 @@
       }
       .separator {
         font-size: 36px;
+        margin-top: 15px;
       }
     }
   </style>
@@ -132,7 +148,14 @@
         document.getElementById('days').innerText = pad(days);
         document.getElementById('hours').innerText = pad(hours);
         document.getElementById('minutes').innerText = pad(minutes);
-        document.getElementById('seconds').innerText = pad(seconds);
+
+        const secondsElem = document.getElementById('seconds');
+        secondsElem.innerText = pad(seconds);
+
+        // Пульсация секунд
+        secondsElem.classList.remove('pulse');
+        void secondsElem.offsetWidth; // Сброс анимации
+        secondsElem.classList.add('pulse');
       }
 
       setInterval(updateCountdown, 1000);
@@ -141,6 +164,7 @@
   </script>
 </body>
 </html>
+
 
 
 
