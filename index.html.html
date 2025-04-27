@@ -32,47 +32,56 @@
     }
 
     .numbers-row {
-      display: flex;
-      align-items: center;
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto auto;
+      align-items: end;
+      gap: 10px;
       font-size: 80px;
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1;
-      gap: 15px;
     }
 
     .labels-row {
-      display: flex;
-      justify-content: center;
-      gap: 65px;
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto auto;
       margin-top: 10px;
       font-size: 16px;
       font-weight: 400;
       letter-spacing: 1px;
     }
 
-    /* Адаптив для мобильных */
+    .labels-row div {
+      text-align: center;
+    }
+
+    /* Скрыть подписи под двоеточиями */
+    .labels-row div:nth-child(2),
+    .labels-row div:nth-child(4),
+    .labels-row div:nth-child(6) {
+      visibility: hidden;
+    }
+
+    /* Адаптив для мобилок */
     @media (max-width: 768px) {
       .numbers-row {
         font-size: 48px;
-        gap: 10px;
+        gap: 8px;
       }
-
       .labels-row {
         font-size: 12px;
-        gap: 35px;
+        gap: 20px;
       }
     }
 
     @media (max-width: 480px) {
       .numbers-row {
         font-size: 36px;
-        gap: 8px;
+        gap: 6px;
       }
-
       .labels-row {
         font-size: 10px;
-        gap: 25px;
+        gap: 12px;
       }
     }
   </style>
@@ -80,7 +89,7 @@
 
 <body>
   <div class="time-block">
-    <div class="numbers-row">
+    <div id="countdown" class="numbers-row">
       <div id="days">00</div>
       <div>:</div>
       <div id="hours">00</div>
@@ -91,8 +100,11 @@
     </div>
     <div class="labels-row">
       <div>дней</div>
+      <div>:</div>
       <div>часов</div>
+      <div>:</div>
       <div>минут</div>
+      <div>:</div>
       <div>секунд</div>
     </div>
   </div>
@@ -126,5 +138,6 @@
   </script>
 </body>
 </html>
+
 
 
