@@ -26,7 +26,7 @@
 
     .time-block {
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start; /* Важный фикс */
     }
 
     .unit {
@@ -41,7 +41,7 @@
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1;
-      transition: transform 0.2s ease; /* для анимации */
+      transition: transform 0.2s ease;
     }
 
     .label {
@@ -51,17 +51,19 @@
       margin-top: 8px;
     }
 
+    .separator-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 5px;
+    }
+
     .separator {
       font-size: 80px;
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1;
-      margin: 0 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      margin-top: 30px; /* Поднимаем на десктопах */
+      height: 80px;
     }
 
     /* Пульсация */
@@ -75,7 +77,7 @@
       100% { transform: scale(1); }
     }
 
-    /* Адаптив для планшетов */
+    /* Адаптив */
     @media (max-width: 768px) {
       .number {
         font-size: 48px;
@@ -85,11 +87,10 @@
       }
       .separator {
         font-size: 48px;
-        margin-top: 20px; /* Чуть ниже подъем */
+        height: 48px;
       }
     }
 
-    /* Адаптив для телефонов */
     @media (max-width: 480px) {
       .number {
         font-size: 36px;
@@ -99,7 +100,7 @@
       }
       .separator {
         font-size: 36px;
-        margin-top: 15px;
+        height: 36px;
       }
     }
   </style>
@@ -111,17 +112,23 @@
       <div class="number" id="days">00</div>
       <div class="label">дней</div>
     </div>
-    <div class="separator">:</div>
+    <div class="separator-block">
+      <div class="separator">:</div>
+    </div>
     <div class="unit">
       <div class="number" id="hours">00</div>
       <div class="label">часов</div>
     </div>
-    <div class="separator">:</div>
+    <div class="separator-block">
+      <div class="separator">:</div>
+    </div>
     <div class="unit">
       <div class="number" id="minutes">00</div>
       <div class="label">минут</div>
     </div>
-    <div class="separator">:</div>
+    <div class="separator-block">
+      <div class="separator">:</div>
+    </div>
     <div class="unit">
       <div class="number" id="seconds">00</div>
       <div class="label">секунд</div>
@@ -131,6 +138,20 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const targetDate = new Date('2025-05-30T19:00:00').getTime();
+
+      const elements = {
+        days: document.getElementById('days'),
+        hours: document.getElementById('hours'),
+        minutes: document.getElementById('minutes'),
+        seconds: document.getElementById('seconds')
+      };
+
+      let lastValues = {
+        days: null,
+        hours: null,
+        minutes: null,
+        seconds: null
+      };
 
       function pad(n) {
         return n < 10 ? '0' + n : n;
@@ -145,17 +166,19 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById('days').innerText = pad(days);
-        document.getElementById('hours').innerText = pad(hours);
-        document.getElementById('minutes').innerText = pad(minutes);
+        const currentValues = { days, hours, minutes, seconds };
 
-        const secondsElem = document.getElementById('seconds');
-        secondsElem.innerText = pad(seconds);
+        // Обновляем каждую цифру и проверяем, изменилась ли она
+        for (const key in elements) {
+          if (currentValues[key] !== lastValues[key]) {
+            elements[key].innerText = pad(currentValues[key]);
+            elements[key].classList.remove('pulse');
+            void elements[key].offsetWidth; // Сброс анимации
+            elements[key].classList.add('pulse');
+          }
+        }
 
-        // Пульсация секунд
-        secondsElem.classList.remove('pulse');
-        void secondsElem.offsetWidth; // Сброс анимации
-        secondsElem.classList.add('pulse');
+        lastValues = currentValues;
       }
 
       setInterval(updateCountdown, 1000);
@@ -164,8 +187,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
