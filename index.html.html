@@ -27,8 +27,8 @@
     .time-block {
       display: flex;
       align-items: flex-start;
-      width: 283px; /* фиксированная ширина */
-      justify-content: space-between; /* равномерное распределение */
+      width: 283px; /* фиксированная ширина всегда */
+      justify-content: space-between;
     }
 
     .unit {
@@ -77,39 +77,6 @@
       0%   { transform: scale(1); }
       50%  { transform: scale(1.2); }
       100% { transform: scale(1); }
-    }
-
-    /* Адаптив */
-    @media (max-width: 768px) {
-      .number {
-        font-size: 48px;
-      }
-      .label {
-        font-size: 12px;
-      }
-      .separator {
-        font-size: 48px;
-        height: 48px;
-      }
-      .time-block {
-        width: 220px; /* уменьшаем ширину на мобиле */
-      }
-    }
-
-    @media (max-width: 480px) {
-      .number {
-        font-size: 36px;
-      }
-      .label {
-        font-size: 10px;
-      }
-      .separator {
-        font-size: 36px;
-        height: 36px;
-      }
-      .time-block {
-        width: 180px; /* ещё меньше на маленьких экранах */
-      }
     }
   </style>
 </head>
@@ -175,7 +142,7 @@
           if (currentValues[key] !== lastValues[key]) {
             elements[key].innerText = pad(currentValues[key]);
             elements[key].classList.remove('pulse');
-            void elements[key].offsetWidth; // Сброс анимации
+            void elements[key].offsetWidth;
             elements[key].classList.add('pulse');
           }
         }
