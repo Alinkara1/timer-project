@@ -31,7 +31,7 @@
 
     #countdown {
       display: flex;
-      align-items: center; /* ВЫРАВНИВАНИЕ по горизонтали */
+      align-items: flex-end; /* важно! цифры и двоеточия по низу */
       gap: 15px;
     }
 
@@ -54,17 +54,6 @@
       letter-spacing: 1px;
       margin-top: 8px;
     }
-
-    .separator {
-      font-size: 80px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      line-height: 1;
-      display: flex;
-      align-items: center; /* Двоеточие выровнено по центру */
-      height: 100%;
-      margin-bottom: 0;
-    }
   </style>
 </head>
 
@@ -75,17 +64,23 @@
         <div class="number" id="days">00</div>
         <div class="label">дней</div>
       </div>
-      <div class="separator">:</div>
+
+      <div class="number">:</div>
+
       <div class="time-unit">
         <div class="number" id="hours">00</div>
         <div class="label">часов</div>
       </div>
-      <div class="separator">:</div>
+
+      <div class="number">:</div>
+
       <div class="time-unit">
         <div class="number" id="minutes">00</div>
         <div class="label">минут</div>
       </div>
-      <div class="separator">:</div>
+
+      <div class="number">:</div>
+
       <div class="time-unit">
         <div class="number" id="seconds">00</div>
         <div class="label">секунд</div>
@@ -122,5 +117,4 @@
   </script>
 </body>
 </html>
-
 
