@@ -27,7 +27,7 @@
     .time-block {
       display: flex;
       align-items: flex-start;
-      width: 283px; /* ширина по умолчанию для десктопа */
+      width: 283px; /* Ширина на десктопе */
       justify-content: space-between;
     }
 
@@ -79,13 +79,13 @@
       100% { transform: scale(1); }
     }
 
-    /* Адаптив на мобильных: ширина меньше на 15px */
+    /* Адаптив: на мобильных -40px от десктопа */
     @media (max-width: 768px) {
       .time-block {
-        width: 268px; /* 283 - 15 = 268px */
+        width: 243px; /* 283 - 40 = 243px */
       }
       .number {
-        font-size: 60px; /* уменьшаем размер цифр на мобиле */
+        font-size: 60px; /* уменьшаем цифры на мобильных */
       }
       .label {
         font-size: 14px;
@@ -173,7 +173,3 @@
   </script>
 </body>
 </html>
-
-
-
-
