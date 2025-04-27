@@ -27,7 +27,7 @@
     .time-block {
       display: flex;
       align-items: flex-start;
-      width: 283px; /* фиксированная ширина всегда */
+      width: 283px; /* ширина по умолчанию для десктопа */
       justify-content: space-between;
     }
 
@@ -77,6 +77,23 @@
       0%   { transform: scale(1); }
       50%  { transform: scale(1.2); }
       100% { transform: scale(1); }
+    }
+
+    /* Адаптивная ширина на мобильных */
+    @media (max-width: 768px) {
+      .time-block {
+        width: 285px; /* на мобиле чуть шире */
+      }
+      .number {
+        font-size: 60px; /* уменьшаем цифры на мобиле */
+      }
+      .label {
+        font-size: 14px;
+      }
+      .separator {
+        font-size: 60px;
+        height: 60px;
+      }
     }
   </style>
 </head>
@@ -156,6 +173,7 @@
   </script>
 </body>
 </html>
+
 
 
 
