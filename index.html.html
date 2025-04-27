@@ -27,7 +27,7 @@
     .time-block {
       display: flex;
       align-items: flex-start;
-      width: 283px; /* Ширина на десктопе */
+      width: 283px; /* ширина на десктопе */
       justify-content: space-between;
     }
 
@@ -79,20 +79,20 @@
       100% { transform: scale(1); }
     }
 
-    /* Адаптив: на мобильных -40px от десктопа */
+    /* Адаптив: на мобильных уменьшаем на 70 пикселей */
     @media (max-width: 768px) {
       .time-block {
-        width: 243px; /* 283 - 40 = 243px */
+        width: 213px; /* 283 - 70 = 213px */
       }
       .number {
-        font-size: 60px; /* уменьшаем цифры на мобильных */
+        font-size: 50px; /* ещё чуть меньше шрифт */
       }
       .label {
-        font-size: 14px;
+        font-size: 12px;
       }
       .separator {
-        font-size: 60px;
-        height: 60px;
+        font-size: 50px;
+        height: 50px;
       }
     }
   </style>
@@ -173,3 +173,4 @@
   </script>
 </body>
 </html>
+
