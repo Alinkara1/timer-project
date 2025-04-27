@@ -26,14 +26,16 @@
 
     .time-block {
       display: flex;
-      align-items: flex-start; /* Важный фикс */
+      align-items: flex-start;
+      width: 283px; /* фиксированная ширина */
+      justify-content: space-between; /* равномерное распределение */
     }
 
     .unit {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0 10px;
+      margin: 0;
     }
 
     .number {
@@ -55,7 +57,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0 5px;
+      margin: 0;
     }
 
     .separator {
@@ -89,6 +91,9 @@
         font-size: 48px;
         height: 48px;
       }
+      .time-block {
+        width: 220px; /* уменьшаем ширину на мобиле */
+      }
     }
 
     @media (max-width: 480px) {
@@ -101,6 +106,9 @@
       .separator {
         font-size: 36px;
         height: 36px;
+      }
+      .time-block {
+        width: 180px; /* ещё меньше на маленьких экранах */
       }
     }
   </style>
@@ -146,12 +154,7 @@
         seconds: document.getElementById('seconds')
       };
 
-      let lastValues = {
-        days: null,
-        hours: null,
-        minutes: null,
-        seconds: null
-      };
+      let lastValues = { days: null, hours: null, minutes: null, seconds: null };
 
       function pad(n) {
         return n < 10 ? '0' + n : n;
@@ -168,7 +171,6 @@
 
         const currentValues = { days, hours, minutes, seconds };
 
-        // Обновляем каждую цифру и проверяем, изменилась ли она
         for (const key in elements) {
           if (currentValues[key] !== lastValues[key]) {
             elements[key].innerText = pad(currentValues[key]);
@@ -187,6 +189,7 @@
   </script>
 </body>
 </html>
+
 
 
 
