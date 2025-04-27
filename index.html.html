@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Таймер вечеринки</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     @font-face {
       font-family: 'Antipasto Pro';
@@ -27,64 +28,72 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
     }
 
-    #countdown {
+    .numbers-row {
       display: flex;
-      align-items: flex-end; /* важно! цифры и двоеточия по низу */
-      gap: 15px;
-    }
-
-    .time-unit {
-      display: flex;
-      flex-direction: column;
       align-items: center;
-    }
-
-    .number {
       font-size: 80px;
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1;
+      gap: 15px;
     }
 
-    .label {
+    .labels-row {
+      display: flex;
+      justify-content: center;
+      gap: 65px;
+      margin-top: 10px;
       font-size: 16px;
       font-weight: 400;
       letter-spacing: 1px;
-      margin-top: 8px;
+    }
+
+    /* Адаптив для мобильных */
+    @media (max-width: 768px) {
+      .numbers-row {
+        font-size: 48px;
+        gap: 10px;
+      }
+
+      .labels-row {
+        font-size: 12px;
+        gap: 35px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .numbers-row {
+        font-size: 36px;
+        gap: 8px;
+      }
+
+      .labels-row {
+        font-size: 10px;
+        gap: 25px;
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="time-block">
-    <div id="countdown">
-      <div class="time-unit">
-        <div class="number" id="days">00</div>
-        <div class="label">дней</div>
-      </div>
-
-      <div class="number">:</div>
-
-      <div class="time-unit">
-        <div class="number" id="hours">00</div>
-        <div class="label">часов</div>
-      </div>
-
-      <div class="number">:</div>
-
-      <div class="time-unit">
-        <div class="number" id="minutes">00</div>
-        <div class="label">минут</div>
-      </div>
-
-      <div class="number">:</div>
-
-      <div class="time-unit">
-        <div class="number" id="seconds">00</div>
-        <div class="label">секунд</div>
-      </div>
+    <div class="numbers-row">
+      <div id="days">00</div>
+      <div>:</div>
+      <div id="hours">00</div>
+      <div>:</div>
+      <div id="minutes">00</div>
+      <div>:</div>
+      <div id="seconds">00</div>
+    </div>
+    <div class="labels-row">
+      <div>дней</div>
+      <div>часов</div>
+      <div>минут</div>
+      <div>секунд</div>
     </div>
   </div>
 
@@ -117,4 +126,5 @@
   </script>
 </body>
 </html>
+
 
